@@ -1,0 +1,26 @@
+# core
+numpy>=1.26
+pandas>=2.1
+scipy>=1.12
+scikit-learn>=1.4
+
+# visualization
+matplotlib>=3.8
+mplsoccer>=1.2
+
+# tracking
+git+https://github.com/roboflow/sports.git
+supervision>=0.23
+ultralytics>=8.2
+opencv-python-headless>=4.10
+
+# video
+ffmpeg-python>=0.2
+
+# soccer analytics (for validation)
+socceraction>=1.4
+statsbombpy>=1.11
+
+# notebooks
+jupyter>=1.0
+gdown>=5.0
