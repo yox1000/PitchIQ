@@ -19,10 +19,22 @@ On top of that: per-match **pass regret heatmaps** showing where each team consi
 
 ## Output Examples
 
-**Pass optimality overlay — corner attack, frame 12s**
-![pass overlay corner attack](outputs/scenario_suite/corner_attack/preview_overlay/sec_12.jpg)
+**Pass optimality — green (safe) + yellow (med) lines, ball carrier highlighted**
+![pass lines green yellow](outputs/showcase/pass_lines_green_yellow.jpg)
 
-**Eval bar time-series — corner attack**
+**Pass optimality — red (risky) line, ball carrier ring visible**
+![pass lines red risky](outputs/showcase/pass_lines_red_risky.jpg)
+
+**Team tracking — player dots tagged by jersey colour, pitch control %**
+![tracking team tags](outputs/showcase/tracking_team_tags.jpg)
+
+**Tactical view — broadcast + Voronoi pitch control + xT grid overlay**
+![tactical voronoi xt](outputs/showcase/tactical_voronoi_xt.jpg)
+
+**Tactical view — late counter scenario, B dominating at 42.8%**
+![tactical late counter](outputs/showcase/tactical_late_counter.jpg)
+
+**Eval bar time-series — corner attack (spike correctly predicts goal at 12s)**
 ![eval plot corner attack](outputs/scenario_suite/corner_attack/corner_attack_eval_plot.png)
 
 **Eval bar time-series — late counter**
@@ -40,14 +52,8 @@ On top of that: per-match **pass regret heatmaps** showing where each team consi
 **Per-half regret grid — Team 0, first half**
 ![regret grid team 0 first half](outputs/regret/regret_team0_first_half_grid.png)
 
-**Standalone homography validation**
-![validation reprojection](outputs/08_validation_reprojection.png)
-
 **Eval bar — test match full run**
 ![test match eval plot](outputs/test_match_eval_plot.png)
-
-**Eval bar — 30s clip baseline**
-![clip 30s eval plot](outputs/clip_30s_eval_plot.png)
 
 ---
 
@@ -114,7 +120,16 @@ data/
   models/                         YOLO weights (auto-downloaded)
   video/scenarios/                30s input clips
 
+cuda_rt/
+  homography_kernel.cu            CUDA kernels (projection, team assign, voronoi)
+  bench_latency.py                latency benchmark, per-stage breakdown
+  trt_export.py                   TensorRT fp16 export attempt (unfinished)
+  build.sh                        nvcc compile script
+  profile_results.txt             measured numbers on RTX 3090
+  notes.md                        why it didn't hit 30fps and what's left
+
 outputs/
+  showcase/                       best hand-picked frames showing all 5 features
   scenario_suite/
     RESULTS.md                      human-readable summary of all 3 runs
     scenario_suite_summary.json
@@ -152,6 +167,20 @@ raw mp4
 **Eval bar** computes `(team_a_voronoi_area / total_area − 0.5) × 200` each frame, yielding a signed centipawn-style advantage. Positive = team A dominant, negative = team B. Smoothed with a 15-frame EMA.
 
 **Pass regret** compares the actual pass made against the optimal available pass (by xT) at the moment of possession. Regret per event = `xT_optimal − xT_actual`. Accumulated per pitch cell, per team, per half. Halftime side-switch is corrected so both halves share the same attacking direction.
+
+---
+
+## Real-time attempt (cuda_rt/)
+
+Target was 30fps end-to-end inference on a single RTX 3090. Three CUDA kernels were written:
+
+- **`project_pts`** — batch homography projection, all N detections in one kernel launch (0.08ms vs 0.14ms python loop)
+- **`assign_teams`** — k-means team colour assignment on GPU (0.06ms)
+- **`voronoi_control`** — pitch control grid rasterisation parallelised over cells (0.31ms vs 3.8ms scipy)
+
+The kernels are in `cuda_rt/homography_kernel.cu`. Compile with `cuda_rt/build.sh` (requires nvcc, tested on CUDA 12.1 / RTX 3090).
+
+Measured per-frame breakdown (`cuda_rt/profile_results.txt`): total 39.9ms. The bottleneck is YOLO inference at 18.7ms (fp32). TensorRT fp16 export was started in `cuda_rt/trt_export.py` — the pitch keypoint model has a dynamic output shape that TRT refuses without explicit optimization profiles, ran out of time to fix. Estimated TRT + nvenc + CUDA streams would get to ~16ms (60fps headroom).
 
 ---
 
