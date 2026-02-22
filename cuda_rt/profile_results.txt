@@ -1,0 +1,64 @@
+RTX 3090 | CUDA 12.1 | driver 530.30.02
+input: 640x360 @ 30fps
+----------------------------------------
+
+projection N=32
+  python loop : 0.142 ms/frame
+  numpy vect  : 0.031 ms/frame
+
+voronoi N=22
+  scipy Voronoi      : 3.847 ms/frame
+  numpy grid raster  : 2.214 ms/frame
+  (cuda kernel target: <0.5ms — achieved on 3090)
+
+per-frame latency breakdown (RTX 3090, 640x360)
+stage                                       ms
+------------------------------------------------
+  video decode (cpu)                        4.2
+  YOLO inference (gpu)                     18.7
+  NMS + ByteTrack (cpu)                     2.1
+  homography solve (cpu)                    1.4
+  homography project (cuda)                 0.1  <-- cuda kernel
+  team assign kmeans (cuda)                 0.1  <-- cuda kernel
+  voronoi grid (cuda)                       0.3  <-- cuda kernel
+  xT scoring (cpu numpy)                    0.9
+  eval bar update (cpu)                     0.2
+  overlay render (cpu opencv)               6.8
+  encode + write (cpu)                      5.1
+------------------------------------------------
+  TOTAL                                    39.9
+
+  target: 33.3ms (30fps)
+  actual: 39.9ms
+
+  our cuda kernels contribute: 0.5ms total
+  bottleneck is YOLO inference (18.7ms) + overlay render (6.8ms) + encode (5.1ms)
+
+----------------------------------------
+notes:
+
+the cuda kernels are fast. projecting 32 detections takes 0.08ms on device
+vs 0.14ms pure python — not the bottleneck at all.
+
+voronoi rasterisation was actually the python bottleneck before i rewrote it:
+scipy.Voronoi on 22 pts took 3.8ms per frame. the cuda kernel brings it to 0.3ms.
+that's a real win but it doesn't get us to 30fps.
+
+what would actually get us there:
+  1. TensorRT export of the YOLO models (estimated: 18.7ms → ~6ms at fp16)
+  2. cuda-accelerated overlay render (replace opencv cpu draw calls)
+  3. nvenc hardware encode instead of software x264
+  4. CUDA streams to overlap decode/inference/render
+
+rough estimate if all 3 are done:
+  decode (nvdec)        ~1.5ms
+  YOLO (trt fp16)       ~6.0ms
+  post-process          ~2.5ms
+  homography+voronoi    ~0.5ms
+  overlay (cuda)        ~1.5ms
+  encode (nvenc)        ~1.0ms
+  -------------------------
+  total                ~13ms  → 75fps headroom
+
+didn't have time to implement TensorRT export before deadline.
+export script started in trt_export.py (unfinished).
