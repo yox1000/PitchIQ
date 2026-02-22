@@ -1,0 +1,59 @@
+{
+  "name": "late_counter",
+  "input_video": "data/video/scenarios/late_counter.mp4",
+  "input_meta": {
+    "fps": 25.0,
+    "frames": 750,
+    "duration_s": 30.0,
+    "width": 640,
+    "height": 360
+  },
+  "outputs": {
+    "overlay": "outputs/scenario_suite/late_counter/late_counter_overlay.mp4",
+    "pass_prediction": "outputs/scenario_suite/late_counter/late_counter_pass_prediction.mp4",
+    "polygon_viz": "outputs/scenario_suite/late_counter/late_counter_polygon_viz.mp4",
+    "eval_csv": "outputs/scenario_suite/late_counter/late_counter_eval_ts.csv",
+    "eval_plot": "outputs/scenario_suite/late_counter/late_counter_eval_plot.png",
+    "reprojection_png": "outputs/scenario_suite/late_counter/late_counter_reprojection.png"
+  },
+  "output_meta": {
+    "overlay": {
+      "fps": 12.5,
+      "frames": 375,
+      "duration_s": 30.0,
+      "width": 640,
+      "height": 360
+    },
+    "pass_prediction": {
+      "fps": 12.5,
+      "frames": 375,
+      "duration_s": 30.0,
+      "width": 640,
+      "height": 360
+    },
+    "polygon_viz": {
+      "fps": 12.5,
+      "frames": 375,
+      "duration_s": 30.0,
+      "width": 1240,
+      "height": 400
+    }
+  },
+  "sampled_metrics": {
+    "samples_used": 36.0,
+    "homography_mean_px": 13.643200397491455,
+    "homography_p90_px": 9.41858329772949,
+    "player_count_mean": 5.190476190476191,
+    "unknown_team_ratio_mean": 0.09682539682539681
+  },
+  "spike_metrics": {
+    "spike_threshold": 12.0,
+    "spike_times_s": [],
+    "goal_times_s": [],
+    "spiked_before_goals_n": 0,
+    "goals_n": 0,
+    "eval_min": -16.235760937452454,
+    "eval_max": 41.5033459098136,
+    "eval_mean": 11.029568911565653
+  }
+}
