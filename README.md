@@ -40,6 +40,15 @@ On top of that: per-match **pass regret heatmaps** showing where each team consi
 **Per-half regret grid — Team 0, first half**
 ![regret grid team 0 first half](outputs/regret/regret_team0_first_half_grid.png)
 
+**Standalone homography validation**
+![validation reprojection](outputs/08_validation_reprojection.png)
+
+**Eval bar — test match full run**
+![test match eval plot](outputs/test_match_eval_plot.png)
+
+**Eval bar — 30s clip baseline**
+![clip 30s eval plot](outputs/clip_30s_eval_plot.png)
+
 ---
 
 ## Scenario Suite Results
@@ -107,10 +116,18 @@ data/
 
 outputs/
   scenario_suite/
+    RESULTS.md                      human-readable summary of all 3 runs
+    scenario_suite_summary.json
     corner_attack/
     late_counter/
     midfield_tikitaka/
   regret/
+  08_validation_reprojection.png    standalone homography accuracy check
+  clip_30s_eval_plot.png            eval bar on 30s baseline clip
+  clip_30s_eval_ts.csv              frame-by-frame eval values
+  clip_30s_track.csv                raw tracking data (player id, team, xy, frame)
+  test_match_eval_plot.png          eval bar on full test match
+  test_match_eval_ts.csv
 ```
 
 ---
