@@ -1,0 +1,189 @@
+{
+  "scenarios": [
+    {
+      "name": "corner_attack",
+      "input_video": "data/video/scenarios/corner_attack.mp4",
+      "input_meta": {
+        "fps": 25.0,
+        "frames": 750,
+        "duration_s": 30.0,
+        "width": 640,
+        "height": 360
+      },
+      "outputs": {
+        "overlay": "outputs/scenario_suite/corner_attack/corner_attack_overlay.mp4",
+        "pass_prediction": "outputs/scenario_suite/corner_attack/corner_attack_pass_prediction.mp4",
+        "polygon_viz": "outputs/scenario_suite/corner_attack/corner_attack_polygon_viz.mp4",
+        "eval_csv": "outputs/scenario_suite/corner_attack/corner_attack_eval_ts.csv",
+        "eval_plot": "outputs/scenario_suite/corner_attack/corner_attack_eval_plot.png",
+        "reprojection_png": "outputs/scenario_suite/corner_attack/corner_attack_reprojection.png"
+      },
+      "output_meta": {
+        "overlay": {
+          "fps": 12.5,
+          "frames": 375,
+          "duration_s": 30.0,
+          "width": 640,
+          "height": 360
+        },
+        "pass_prediction": {
+          "fps": 12.5,
+          "frames": 375,
+          "duration_s": 30.0,
+          "width": 640,
+          "height": 360
+        },
+        "polygon_viz": {
+          "fps": 12.5,
+          "frames": 375,
+          "duration_s": 30.0,
+          "width": 1240,
+          "height": 400
+        }
+      },
+      "sampled_metrics": {
+        "samples_used": 36.0,
+        "homography_mean_px": 6.213122166120089,
+        "homography_p90_px": 9.776498413085939,
+        "player_count_mean": 4.625,
+        "unknown_team_ratio_mean": 0.07589285714285714
+      },
+      "spike_metrics": {
+        "spike_threshold": 12.0,
+        "spike_times_s": [
+          2.72,
+          3.04,
+          8.96
+        ],
+        "goal_times_s": [
+          12.0
+        ],
+        "spiked_before_goals_n": 1,
+        "goals_n": 1,
+        "eval_min": -49.37501242916062,
+        "eval_max": 11.329302918618495,
+        "eval_mean": -17.156999979016966
+      }
+    },
+    {
+      "name": "midfield_tikitaka",
+      "input_video": "data/video/scenarios/midfield_tikitaka.mp4",
+      "input_meta": {
+        "fps": 29.97,
+        "frames": 899,
+        "duration_s": 29.996663329996665,
+        "width": 640,
+        "height": 360
+      },
+      "outputs": {
+        "overlay": "outputs/scenario_suite/midfield_tikitaka/midfield_tikitaka_overlay.mp4",
+        "pass_prediction": "outputs/scenario_suite/midfield_tikitaka/midfield_tikitaka_pass_prediction.mp4",
+        "polygon_viz": "outputs/scenario_suite/midfield_tikitaka/midfield_tikitaka_polygon_viz.mp4",
+        "eval_csv": "outputs/scenario_suite/midfield_tikitaka/midfield_tikitaka_eval_ts.csv",
+        "eval_plot": "outputs/scenario_suite/midfield_tikitaka/midfield_tikitaka_eval_plot.png",
+        "reprojection_png": "outputs/scenario_suite/midfield_tikitaka/midfield_tikitaka_reprojection.png"
+      },
+      "output_meta": {
+        "overlay": {
+          "fps": 14.985,
+          "frames": 450,
+          "duration_s": 30.03003003003003,
+          "width": 640,
+          "height": 360
+        },
+        "pass_prediction": {
+          "fps": 14.985,
+          "frames": 450,
+          "duration_s": 30.03003003003003,
+          "width": 640,
+          "height": 360
+        },
+        "polygon_viz": {
+          "fps": 14.985,
+          "frames": 450,
+          "duration_s": 30.03003003003003,
+          "width": 1240,
+          "height": 400
+        }
+      },
+      "sampled_metrics": {
+        "samples_used": 36.0,
+        "homography_mean_px": 2.678546588996361,
+        "homography_p90_px": 5.731184101104736,
+        "player_count_mean": 3.4705882352941178,
+        "unknown_team_ratio_mean": 0.17352941176470593
+      },
+      "spike_metrics": {
+        "spike_threshold": 12.0,
+        "spike_times_s": [
+          12.88
+        ],
+        "goal_times_s": [],
+        "spiked_before_goals_n": 0,
+        "goals_n": 0,
+        "eval_min": -41.941470244880136,
+        "eval_max": 26.793474475725876,
+        "eval_mean": -1.5435182532687475
+      }
+    },
+    {
+      "name": "late_counter",
+      "input_video": "data/video/scenarios/late_counter.mp4",
+      "input_meta": {
+        "fps": 25.0,
+        "frames": 750,
+        "duration_s": 30.0,
+        "width": 640,
+        "height": 360
+      },
+      "outputs": {
+        "overlay": "outputs/scenario_suite/late_counter/late_counter_overlay.mp4",
+        "pass_prediction": "outputs/scenario_suite/late_counter/late_counter_pass_prediction.mp4",
+        "polygon_viz": "outputs/scenario_suite/late_counter/late_counter_polygon_viz.mp4",
+        "eval_csv": "outputs/scenario_suite/late_counter/late_counter_eval_ts.csv",
+        "eval_plot": "outputs/scenario_suite/late_counter/late_counter_eval_plot.png",
+        "reprojection_png": "outputs/scenario_suite/late_counter/late_counter_reprojection.png"
+      },
+      "output_meta": {
+        "overlay": {
+          "fps": 12.5,
+          "frames": 375,
+          "duration_s": 30.0,
+          "width": 640,
+          "height": 360
+        },
+        "pass_prediction": {
+          "fps": 12.5,
+          "frames": 375,
+          "duration_s": 30.0,
+          "width": 640,
+          "height": 360
+        },
+        "polygon_viz": {
+          "fps": 12.5,
+          "frames": 375,
+          "duration_s": 30.0,
+          "width": 1240,
+          "height": 400
+        }
+      },
+      "sampled_metrics": {
+        "samples_used": 36.0,
+        "homography_mean_px": 13.643200397491455,
+        "homography_p90_px": 9.41858329772949,
+        "player_count_mean": 5.190476190476191,
+        "unknown_team_ratio_mean": 0.09682539682539681
+      },
+      "spike_metrics": {
+        "spike_threshold": 12.0,
+        "spike_times_s": [],
+        "goal_times_s": [],
+        "spiked_before_goals_n": 0,
+        "goals_n": 0,
+        "eval_min": -16.235760937452454,
+        "eval_max": 41.5033459098136,
+        "eval_mean": 11.029568911565653
+      }
+    }
+  ]
+}
