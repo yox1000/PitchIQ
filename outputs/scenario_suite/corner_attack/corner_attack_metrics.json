@@ -1,0 +1,65 @@
+{
+  "name": "corner_attack",
+  "input_video": "data/video/scenarios/corner_attack.mp4",
+  "input_meta": {
+    "fps": 25.0,
+    "frames": 750,
+    "duration_s": 30.0,
+    "width": 640,
+    "height": 360
+  },
+  "outputs": {
+    "overlay": "outputs/scenario_suite/corner_attack/corner_attack_overlay.mp4",
+    "pass_prediction": "outputs/scenario_suite/corner_attack/corner_attack_pass_prediction.mp4",
+    "polygon_viz": "outputs/scenario_suite/corner_attack/corner_attack_polygon_viz.mp4",
+    "eval_csv": "outputs/scenario_suite/corner_attack/corner_attack_eval_ts.csv",
+    "eval_plot": "outputs/scenario_suite/corner_attack/corner_attack_eval_plot.png",
+    "reprojection_png": "outputs/scenario_suite/corner_attack/corner_attack_reprojection.png"
+  },
+  "output_meta": {
+    "overlay": {
+      "fps": 12.5,
+      "frames": 375,
+      "duration_s": 30.0,
+      "width": 640,
+      "height": 360
+    },
+    "pass_prediction": {
+      "fps": 12.5,
+      "frames": 375,
+      "duration_s": 30.0,
+      "width": 640,
+      "height": 360
+    },
+    "polygon_viz": {
+      "fps": 12.5,
+      "frames": 375,
+      "duration_s": 30.0,
+      "width": 1240,
+      "height": 400
+    }
+  },
+  "sampled_metrics": {
+    "samples_used": 36.0,
+    "homography_mean_px": 6.213122166120089,
+    "homography_p90_px": 9.776498413085939,
+    "player_count_mean": 4.625,
+    "unknown_team_ratio_mean": 0.07589285714285714
+  },
+  "spike_metrics": {
+    "spike_threshold": 12.0,
+    "spike_times_s": [
+      2.72,
+      3.04,
+      8.96
+    ],
+    "goal_times_s": [
+      12.0
+    ],
+    "spiked_before_goals_n": 1,
+    "goals_n": 1,
+    "eval_min": -49.37501242916062,
+    "eval_max": 11.329302918618495,
+    "eval_mean": -17.156999979016966
+  }
+}
